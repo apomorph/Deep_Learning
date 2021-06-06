@@ -1,0 +1,43 @@
+################# tesseract ##########################
+安装
+	官方新版本只有二进制包
+	非官方windows installer：https://github.com/UB-Mannheim/tesseract/wiki
+	需要安装中文库 
+
+使用
+	例如下面命令会以中文识别文件内容并输出到当前目录下的result.txt文件中
+		tesseract.exe C:\Users\jiaob\Desktop\2.png result -l chi_sim
+		注意需要白底黑字，否则会提示Empty page!!
+		
+
+################### pytesseract ########################
+安装
+	1.创建环境 克隆base环境(base环境安装了pytorch等核心库)
+		conda create --name ocr  --clone base
+
+	2.激活环境
+		conda activate orc
+		如果要返回base环境则执行：conda deactivate
+		
+	#3.检查当前环境的库
+		conda list
+		
+	4.安装ocr需要的相关库
+		pip install pytesseract		#python驱动tesseract的库
+		#pip install Pillow
+		
+使用
+	示例代码
+		import pytesseract as pt
+		from PIL import Image
+
+		path = r'E:\Tesseract-OCR\tesseract.exe'			#tesseract的路径
+		pt.pytesseract.tesseract_cmd = path
+		img = Image.open("2.png")
+		text = pt.image_to_string(img,lang="chi_sim")
+		print(text)
+		
+		
+	如果提示tesseract找不到或未安装	
+		方法1：修改pytessract.py文件中的tesseract_cmd = r'E:\Tesseract-OCR\tesseract.exe'
+		方法2：将tesseract所在路径添加到环境变量并重启控制台

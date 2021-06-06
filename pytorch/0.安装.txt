@@ -1,0 +1,29 @@
+Anaconda方式：
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+(直接在pytorch官网查看安装方式 官网会直接给出机器要求和适配当前机器的安装命令)
+(建议不使用 -c pytorch，而是使用国内镜像)
+
+
+- cudatoolkit=10.2		#英伟达工具库 用于驱动英伟达显卡
+- pytorch
+- torchaudio
+- torchvision
+
+
+问题：
+1.安装过程中遇到http error 类似问题：
+	重新安装
+	
+2.安装提示遇到file could not unlink
+	权限问题 给Anaconda根目录添加完全控制的权限
+	
+3.Error loading "Anaconda3\lib\site-packages\torch\lib\caffe2_detectron_ops_gpu.dll"	
+	#conda install intel-openmp
+	#windows系统需要安装 Visual Studio
+	#安装VC_redist.x64.exe
+	
+	参考官方文档吧 仔细看https://github.com/pytorch/pytorch#installation
+	conda install -c conda-forge libuv=1.39
+	
+4.torch.cuda.is_available() == False
+	CUDA Toolkit版本与cuda driver版本不兼容，升级驱动版本
